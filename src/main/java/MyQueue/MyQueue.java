@@ -1,35 +1,29 @@
 package MyQueue;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import java.util.Queue;
+import java.util.PriorityQueue;
 
-class MyQueue<T> extends LinkedList implements Queue {
-    private static final int limit = 1000;
-    private LinkedList <T> data = new LinkedList<>();
+
+class MyQueue<T> implements MyQueueInterface {
+    private static final int ELEMENTS_LIMIT = 1000;
+    private static final int DEFAULT_INIT_SIZE = 10;
+
+    public MyQueue() {
+        this.data = new Object [DEFAULT_INIT_SIZE];
+    }
+
+    public MyQueue(int newDefault){
+        this.data = new Object[DEFAULT_INIT_SIZE];
+    }
 
     @Override
     public boolean add(Object o) {
-        if (data.size() >= limit)
-            throw new QueueFullException("Queue reached it's maximum elements capacity which is " + limit);
+        if (data.length >= ELEMENTS_LIMIT)
+            throw new QueueFullException("MyQueueInterface reached it's maximum elements capacity which is " + limit);
         else
-            data.add((T)o);
-        return true;
-    }
-
-    @Override
-    public boolean offer(Object o) {
-        return false;
-    }
-
-    @Override
-    public Object remove() throws NoSuchElementException {
-        throw new NoSuchElementException("Queue is empty, you cannot remove any element.");
-    }
-
-    @Override
-    public Object poll() {
-        return null;
+            return data.add((T) o);
     }
 
     @Override
@@ -38,7 +32,22 @@ class MyQueue<T> extends LinkedList implements Queue {
     }
 
     @Override
+    public void offer(Object element) {
+
+    }
+
+    @Override
     public Object peek() {
         return null;
+    }
+
+    @Override
+    public Object pool() {
+        return null;
+    }
+
+    @Override
+    public void remove() {
+        throw new NoSuchElementException("MyQueueInterface is empty, you cannot remove any element.");
     }
 }
